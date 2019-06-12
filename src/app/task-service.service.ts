@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class TaskServiceService {
+export class TaskService {
 
   constructor() { }
 
@@ -17,8 +17,10 @@ export class TaskServiceService {
 
   ];
 
-  addToCart(tasks) {
-    this.tasks.push(tasks);
+  addToCart(task) {
+    this.tasks.unshift(task);
+    console.log('task',this.tasks);
+    sessionStorage.setItem('tasks',JSON.stringify(this.tasks));
   }
 
   getItems() {

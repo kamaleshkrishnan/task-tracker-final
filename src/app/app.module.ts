@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
-import {TaskServiceService} from './task-service.service';
+import {TaskService} from './task-service.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -11,9 +12,10 @@ import {TaskServiceService} from './task-service.service';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFontAwesomeModule
   ],
-  providers: [TaskServiceService],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

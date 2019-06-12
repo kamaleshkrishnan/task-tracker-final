@@ -1,7 +1,7 @@
 
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, Input, AfterViewInit } from '@angular/core';
-import { TaskServiceService} from './task-service.service';
+import { TaskService} from './task-service.service';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +12,49 @@ export class AppComponent implements OnInit {
 
   title = 'app';
   taskForm: FormGroup;
-  
+  task = [];
   constructor(private fb: FormBuilder,
-              private taskService: TaskServiceService) {}
+              private taskService: TaskService) {}
   
   ngOnInit() {
     this.createTaskForm();
-    this.taskService.getItems();
+    this.getTaskService();
   }
   
   createTaskForm(){
     this.taskForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname:  ['', Validators.required],
+      names: ['', Validators.required],
+      date:  ['', Validators.required],
       assigned:  ['', Validators.required]
     })
   }
+  
+  getTaskService(){
+    if(this.task.length === 0){
+      this.task = JSON.parse(sessionStorage.getItem('tasks'));
+    }else{
+      this.task = this.taskService.getItems();
+    }
+    
+  }
 
+  addTask(task){
+    const pushItem = {
+      "names": this.taskForm.controls.names.value,
+      "date" : this.taskForm.controls.date.value,
+      "assigned": this.taskForm.controls.assigned.value
+    }
+    this.taskService.addToCart(pushItem);
+    this.createTaskForm();
+    this.task = JSON.parse(sessionStorage.getItem('tasks'));
+  }
+
+  delete(data){
+    this.task.forEach((element, index) => {
+      if(data === element){
+        this.task.splice(index,1);
+        sessionStorage.setItem('tasks',JSON.stringify(this.task));
+      }
+    }); 
+  }
 }
