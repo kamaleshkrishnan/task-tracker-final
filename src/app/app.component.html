@@ -16,20 +16,10 @@
       <div class="container col-sm-6">       
           <table class="table">
             <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
+              <tr *ngFor="let data of tasks">
+                <td>{{data.name}}</td>
+                <td>{{data.date}}</td>
+                <td>{{data.assigned}}</td>
               </tr>
             </tbody>
           </table>

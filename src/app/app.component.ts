@@ -1,6 +1,7 @@
 
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, Input, AfterViewInit } from '@angular/core';
+import { TaskServiceService} from './task-service.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,12 @@ export class AppComponent implements OnInit {
   title = 'app';
   taskForm: FormGroup;
   
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private taskService: TaskServiceService) {}
   
   ngOnInit() {
     this.createTaskForm();
+    this.taskService.getItems();
   }
   
   createTaskForm(){
@@ -25,5 +28,5 @@ export class AppComponent implements OnInit {
       assigned:  ['', Validators.required]
     })
   }
-  
+
 }
