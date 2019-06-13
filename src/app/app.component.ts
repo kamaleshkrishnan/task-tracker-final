@@ -30,10 +30,10 @@ export class AppComponent implements OnInit {
   }
   
   getTaskService(){
-    if(this.task.length === 0){
-      this.task = JSON.parse(sessionStorage.getItem('tasks'));
+    if(!sessionStorage.getItem('tasks')){
+       this.task = this.taskService.getItems();
     }else{
-      this.task = this.taskService.getItems();
+      this.task = JSON.parse(sessionStorage.getItem('tasks'));
     }
     
   }
